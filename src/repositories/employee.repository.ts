@@ -1,8 +1,8 @@
-import type { EmployeeCreationAttributes } from '../models/employee.model';
+import type { EmployeeCreationInput } from '../models/employee.model';
 import { Employee } from '../models/employee.model';
 
-export async function create(
-  attributes: EmployeeCreationAttributes,
+export async function createEmployee(
+  input: EmployeeCreationInput,
 ): Promise<Employee> {
-  return Employee.create(attributes);
+  return Employee.create(input);
 }

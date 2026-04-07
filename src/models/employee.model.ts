@@ -11,6 +11,9 @@ export interface EmployeeAttributes {
 
 export type EmployeeCreationAttributes = Optional<EmployeeAttributes, 'id'>;
 
+
+export type EmployeeCreationInput = Omit<EmployeeAttributes, 'id'>;
+
 export class Employee extends Model<
   EmployeeAttributes,
   EmployeeCreationAttributes

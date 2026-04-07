@@ -10,8 +10,13 @@ export async function createEmployee(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const data = await employeeService.createEmployee(req.body);
-    sendSuccess(res, MESSAGES.EMPLOYEE_CREATED, HTTP_STATUS.CREATED, data);
+    const employee = await employeeService.createEmployee(req.body);
+    sendSuccess(
+      res,
+      MESSAGES.EMPLOYEE_CREATED,
+      HTTP_STATUS.CREATED,
+      employee,
+    );
   } catch (error) {
     next(error);
   }
