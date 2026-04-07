@@ -1,7 +1,6 @@
+import './employee.model';
 import { sequelize } from '../config/database';
 
-/**
- * Register Sequelize models and associations here as the project grows.
- */
-
 export { sequelize };
+export { Employee } from './employee.model';
+export type { EmployeeAttributes, EmployeeCreationAttributes } from './employee.model';
