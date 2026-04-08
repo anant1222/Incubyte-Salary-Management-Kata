@@ -29,3 +29,29 @@ export async function getCountrySalaryMetrics(
 
   return { country, min_salary, max_salary, avg_salary };
 }
+
+export type JobTitleSalaryMetrics = {
+  job_title: string;
+  avg_salary: number;
+};
+
+export async function getJobTitleSalaryMetrics(
+  jobTitle: string,
+): Promise<JobTitleSalaryMetrics> {
+  const salaries = await employeeRepository.findSalariesByJobTitle(jobTitle);
+
+  if (salaries.length === 0) {
+    throw new HttpError(
+      HTTP_STATUS.NOT_FOUND,
+      MESSAGES.NO_EMPLOYEES_FOR_JOB_TITLE,
+    );
+  }
+
+  const sum = salaries.reduce((total, salary) => total + salary, 0);
+  const avg_salary = sum / salaries.length;
+
+  return {
+    job_title: jobTitle,
+    avg_salary,
+  };
+}

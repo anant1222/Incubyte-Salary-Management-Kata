@@ -49,3 +49,15 @@ export async function findSalariesByCountry(
 
   return records.map((record) => record.salary as number);
 }
+
+export async function findSalariesByJobTitle(
+  jobTitle: string,
+): Promise<number[]> {
+  const records = await Employee.findAll({
+    where: { job_title: jobTitle },
+    attributes: ['salary'],
+    raw: true,
+  });
+
+  return records.map((record) => record.salary as number);
+}

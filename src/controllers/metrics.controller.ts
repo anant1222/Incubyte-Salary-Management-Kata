@@ -23,3 +23,24 @@ export async function getCountrySalaryMetrics(
     next(error);
   }
 }
+
+export async function getJobTitleSalaryMetrics(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const { title: jobTitle } = req.query as { title: string };
+    const jobSalaryMetrics =
+      await metricsService.getJobTitleSalaryMetrics(jobTitle);
+
+    sendSuccess(
+      res,
+      MESSAGES.JOB_METRICS_FETCHED,
+      HTTP_STATUS.OK,
+      jobSalaryMetrics,
+    );
+  } catch (error) {
+    next(error);
+  }
+}
