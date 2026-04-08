@@ -16,6 +16,12 @@ router.post(
 );
 
 router.get(
+  '/:id/salary',
+  validateParams(getEmployeeByIdParamsSchema),
+  employeeController.getEmployeeSalary,
+);
+
+router.get(
   '/:id',
   validateParams(getEmployeeByIdParamsSchema),
   employeeController.getEmployeeById,
