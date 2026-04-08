@@ -40,3 +40,22 @@ export async function getEmployeeById(
     next(error);
   }
 }
+
+export async function updateEmployee(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const id = Number(req.params.id);
+    const employee = await employeeService.updateEmployee(id, req.body);
+    sendSuccess(
+      res,
+      MESSAGES.EMPLOYEE_UPDATED,
+      HTTP_STATUS.OK,
+      employee,
+    );
+  } catch (error) {
+    next(error);
+  }
+}

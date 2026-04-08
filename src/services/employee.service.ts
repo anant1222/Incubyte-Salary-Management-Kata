@@ -34,3 +34,16 @@ export async function getEmployeeById(id: number): Promise<EmployeeAttributes> {
 
   return toEmployeeAttributes(employee);
 }
+
+export async function updateEmployee(
+  id: number,
+  input: EmployeeCreationInput,
+): Promise<EmployeeAttributes> {
+  const employee = await employeeRepository.updateEmployeeById(id, input);
+
+  if (!employee) {
+    throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
+  }
+
+  return toEmployeeAttributes(employee);
+}

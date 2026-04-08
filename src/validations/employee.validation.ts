@@ -7,6 +7,8 @@ export const createEmployeeBodySchema = Joi.object({
   salary: Joi.number().required().min(0),
 });
 
+export const updateEmployeeBodySchema = createEmployeeBodySchema;
+
 export const getEmployeeByIdParamsSchema = Joi.object({
   id: Joi.number().integer().min(1).required().label('id'),
 });
