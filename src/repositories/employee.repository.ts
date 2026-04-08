@@ -26,3 +26,14 @@ export async function updateEmployeeById(
   await employee.update(input);
   return employee;
 }
+
+export async function deleteEmployeeById(id: number): Promise<boolean> {
+  const employee = await Employee.findByPk(id);
+
+  if (!employee) {
+    return false;
+  }
+
+  await employee.destroy();
+  return true;
+}

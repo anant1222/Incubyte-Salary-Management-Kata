@@ -28,4 +28,10 @@ router.put(
   employeeController.updateEmployee,
 );
 
+router.delete(
+  '/:id',
+  validateParams(getEmployeeByIdParamsSchema),
+  employeeController.deleteEmployee,
+);
+
 export default router;
