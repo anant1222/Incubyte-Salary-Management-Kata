@@ -12,3 +12,17 @@ export async function findEmployeeById(
 ): Promise<Employee | null> {
   return Employee.findByPk(id);
 }
+
+export async function updateEmployeeById(
+  id: number,
+  input: EmployeeCreationInput,
+): Promise<Employee | null> {
+  const employee = await Employee.findByPk(id);
+
+  if (!employee) {
+    return null;
+  }
+
+  await employee.update(input);
+  return employee;
+}
