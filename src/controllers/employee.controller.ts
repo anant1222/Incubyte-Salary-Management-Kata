@@ -28,7 +28,7 @@ export async function getEmployeeById(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const id = Number(req.params['id']);
+    const id = Number(req.params.id);
     const employee = await employeeService.getEmployeeById(id);
     sendSuccess(
       res,
