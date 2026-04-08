@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import { HTTP_STATUS } from '../constants/http-status';
 import { MESSAGES } from '../constants/messages';
 import * as employeeService from '../services/employee.service';
+import * as salaryService from '../services/salary.service';
 import { sendSuccess } from '../utils/api-response';
 
 export async function createEmployee(
@@ -16,6 +17,25 @@ export async function createEmployee(
       MESSAGES.EMPLOYEE_CREATED,
       HTTP_STATUS.CREATED,
       employee,
+    );
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getEmployeeSalary(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const id = Number(req.params.id);
+    const breakdown = await salaryService.getEmployeeSalaryBreakdown(id);
+    sendSuccess(
+      res,
+      MESSAGES.EMPLOYEE_SALARY_FETCHED,
+      HTTP_STATUS.OK,
+      breakdown,
     );
   } catch (error) {
     next(error);
