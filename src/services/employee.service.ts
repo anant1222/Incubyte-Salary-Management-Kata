@@ -47,3 +47,11 @@ export async function updateEmployee(
   requireEmployee(employee);
   return toEmployeeAttributes(employee);
 }
+
+export async function deleteEmployee(id: number): Promise<void> {
+  const deleted = await employeeRepository.deleteEmployeeById(id);
+
+  if (!deleted) {
+    throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
+  }
+}

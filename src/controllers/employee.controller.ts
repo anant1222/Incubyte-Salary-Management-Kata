@@ -59,3 +59,22 @@ export async function updateEmployee(
     next(error);
   }
 }
+
+export async function deleteEmployee(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const id = Number(req.params.id);
+    await employeeService.deleteEmployee(id);
+    sendSuccess(
+      res,
+      MESSAGES.EMPLOYEE_DELETED,
+      HTTP_STATUS.OK,
+      {},
+    );
+  } catch (error) {
+    next(error);
+  }
+}
