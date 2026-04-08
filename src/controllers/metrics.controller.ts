@@ -31,13 +31,14 @@ export async function getJobTitleSalaryMetrics(
 ): Promise<void> {
   try {
     const { title: jobTitle } = req.query as { title: string };
-    const metrics = await metricsService.getJobTitleSalaryMetrics(jobTitle);
+    const jobSalaryMetrics =
+      await metricsService.getJobTitleSalaryMetrics(jobTitle);
 
     sendSuccess(
       res,
       MESSAGES.JOB_METRICS_FETCHED,
       HTTP_STATUS.OK,
-      metrics,
+      jobSalaryMetrics,
     );
   } catch (error) {
     next(error);

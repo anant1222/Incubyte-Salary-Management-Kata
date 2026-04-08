@@ -50,5 +50,8 @@ export async function getJobTitleSalaryMetrics(
   const sum = salaries.reduce((total, salary) => total + salary, 0);
   const avg_salary = sum / salaries.length;
 
-  return { job_title: jobTitle, avg_salary };
+  return {
+    job_title: jobTitle,
+    avg_salary,
+  };
 }
