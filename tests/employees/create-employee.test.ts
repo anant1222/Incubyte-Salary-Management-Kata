@@ -15,10 +15,6 @@ describe('POST /employees', () => {
     await sequelize.sync({ force: true });
   });
 
-  afterAll(async () => {
-    await sequelize.close();
-  });
-
   it('returns 201 and the created employee in the standard envelope', async () => {
     const response = await request(app)
       .post('/employees')

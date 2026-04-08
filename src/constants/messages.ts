@@ -1,5 +1,15 @@
 export const MESSAGES = {
   HEALTH_SUCCESS: 'Health check successful',
+  EMPLOYEE_CREATED: 'Employee created successfully',
+  EMPLOYEE_FETCHED: 'Employee fetched successfully',
+  EMPLOYEE_UPDATED: 'Employee updated successfully',
+  EMPLOYEE_DELETED: 'Employee deleted successfully',
+  EMPLOYEE_SALARY_FETCHED: 'Employee salary fetched successfully',
+  EMPLOYEE_NOT_FOUND: 'Employee not found',
+  COUNTRY_METRICS_FETCHED: 'Country salary metrics fetched successfully',
+  NO_EMPLOYEES_FOR_COUNTRY: 'No employees found for the given country',
+  JOB_METRICS_FETCHED: 'Job title salary metrics fetched successfully',
+  NO_EMPLOYEES_FOR_JOB_TITLE: 'No employees found for the given job title',
   ROUTE_NOT_FOUND: 'Route not found',
   INTERNAL_ERROR: 'Internal server error',
 } as const;
