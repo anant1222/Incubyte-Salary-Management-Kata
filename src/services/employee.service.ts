@@ -18,6 +18,14 @@ function toEmployeeAttributes(model: Employee): EmployeeAttributes {
   };
 }
 
+function requireEmployee(
+  employee: Employee | null,
+): asserts employee is Employee {
+  if (!employee) {
+    throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
+  }
+}
+
 export async function createEmployee(
   input: EmployeeCreationInput,
 ): Promise<EmployeeAttributes> {
@@ -27,11 +35,7 @@ export async function createEmployee(
 
 export async function getEmployeeById(id: number): Promise<EmployeeAttributes> {
   const employee = await employeeRepository.findEmployeeById(id);
-
-  if (!employee) {
-    throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
-  }
-
+  requireEmployee(employee);
   return toEmployeeAttributes(employee);
 }
 
@@ -40,10 +44,6 @@ export async function updateEmployee(
   input: EmployeeCreationInput,
 ): Promise<EmployeeAttributes> {
   const employee = await employeeRepository.updateEmployeeById(id, input);
-
-  if (!employee) {
-    throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
-  }
-
+  requireEmployee(employee);
   return toEmployeeAttributes(employee);
 }

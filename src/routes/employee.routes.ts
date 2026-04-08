@@ -16,7 +16,9 @@ router.post(
 );
 
 router.get(
-  '/:id', validateParams(getEmployeeByIdParamsSchema), employeeController.getEmployeeById,
+  '/:id',
+  validateParams(getEmployeeByIdParamsSchema),
+  employeeController.getEmployeeById,
 );
 
 router.put(
