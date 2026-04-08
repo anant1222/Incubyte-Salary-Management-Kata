@@ -33,3 +33,17 @@ export function validateParams(schema: ObjectSchema) {
     next();
   };
 }
+
+export function validateQuery(schema: ObjectSchema) {
+  return (req: Request, _res: Response, next: NextFunction): void => {
+    const { error, value } = schema.validate(req.query, joiRequestOptions);
+
+    if (error) {
+      next(error);
+      return;
+    }
+
+    req.query = value;
+    next();
+  };
+}

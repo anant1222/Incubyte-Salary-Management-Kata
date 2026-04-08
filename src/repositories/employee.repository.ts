@@ -37,3 +37,15 @@ export async function deleteEmployeeById(id: number): Promise<boolean> {
   await employee.destroy();
   return true;
 }
+
+export async function findSalariesByCountry(
+  country: string,
+): Promise<number[]> {
+  const rows = await Employee.findAll({
+    where: { country },
+    attributes: ['salary'],
+    raw: true,
+  });
+
+  return rows.map((row) => row.salary as number);
+}
