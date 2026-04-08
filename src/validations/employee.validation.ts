@@ -6,3 +6,7 @@ export const createEmployeeBodySchema = Joi.object({
   country: Joi.string().trim().min(1).required(),
   salary: Joi.number().required().min(0),
 });
+
+export const getEmployeeByIdParamsSchema = Joi.object({
+  id: Joi.number().integer().min(1).required().label('id'),
+});

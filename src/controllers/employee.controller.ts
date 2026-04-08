@@ -21,3 +21,22 @@ export async function createEmployee(
     next(error);
   }
 }
+
+export async function getEmployeeById(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  try {
+    const id = Number(req.params['id']);
+    const employee = await employeeService.getEmployeeById(id);
+    sendSuccess(
+      res,
+      MESSAGES.EMPLOYEE_FETCHED,
+      HTTP_STATUS.OK,
+      employee,
+    );
+  } catch (error) {
+    next(error);
+  }
+}
