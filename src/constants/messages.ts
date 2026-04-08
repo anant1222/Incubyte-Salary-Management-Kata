@@ -6,6 +6,8 @@ export const MESSAGES = {
   EMPLOYEE_DELETED: 'Employee deleted successfully',
   EMPLOYEE_SALARY_FETCHED: 'Employee salary fetched successfully',
   EMPLOYEE_NOT_FOUND: 'Employee not found',
+  COUNTRY_METRICS_FETCHED: 'Country salary metrics fetched successfully',
+  NO_EMPLOYEES_FOR_COUNTRY: 'No employees found for the given country',
   ROUTE_NOT_FOUND: 'Route not found',
   INTERNAL_ERROR: 'Internal server error',
 } as const;
