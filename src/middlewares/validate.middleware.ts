@@ -1,12 +1,14 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { ObjectSchema } from 'joi';
 
+const joiRequestOptions = {
+  abortEarly: false,
+  stripUnknown: true,
+} as const;
+
 export function validateBody(schema: ObjectSchema) {
   return (req: Request, _res: Response, next: NextFunction): void => {
-    const { error, value } = schema.validate(req.body, {
-      abortEarly: false,
-      stripUnknown: true,
-    });
+    const { error, value } = schema.validate(req.body, joiRequestOptions);
 
     if (error) {
       next(error);
@@ -14,6 +16,20 @@ export function validateBody(schema: ObjectSchema) {
     }
 
     req.body = value;
+    next();
+  };
+}
+
+export function validateParams(schema: ObjectSchema) {
+  return (req: Request, _res: Response, next: NextFunction): void => {
+    const { error, value } = schema.validate(req.params, joiRequestOptions);
+
+    if (error) {
+      next(error);
+      return;
+    }
+
+    Object.assign(req.params, value);
     next();
   };
 }

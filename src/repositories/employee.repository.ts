@@ -6,3 +6,9 @@ export async function createEmployee(
 ): Promise<Employee> {
   return Employee.create(input);
 }
+
+export async function findEmployeeById(
+  id: number,
+): Promise<Employee | null> {
+  return Employee.findByPk(id);
+}
