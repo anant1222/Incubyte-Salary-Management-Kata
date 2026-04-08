@@ -1,3 +1,4 @@
+import { col, fn, Op, where } from 'sequelize';
 import type { EmployeeCreationInput } from '../models/employee.model';
 import { Employee } from '../models/employee.model';
 
@@ -42,7 +43,7 @@ export async function findSalariesByCountry(
   country: string,
 ): Promise<number[]> {
   const records = await Employee.findAll({
-    where: { country },
+    where: where(fn('LOWER', col('country')), fn('LOWER', country)),
     attributes: ['salary'],
     raw: true,
   });
@@ -54,7 +55,15 @@ export async function findSalariesByJobTitle(
   jobTitle: string,
 ): Promise<number[]> {
   const records = await Employee.findAll({
-    where: { job_title: jobTitle },
+    where: where(
+      fn(
+        'INSTR',
+        fn('LOWER', col('job_title')),
+        fn('LOWER', jobTitle),
+      ),
+      Op.gt,
+      0,
+    ),
     attributes: ['salary'],
     raw: true,
   });

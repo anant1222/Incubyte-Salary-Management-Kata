@@ -66,6 +66,21 @@ describe('GET /metrics/country', () => {
     });
   });
 
+  it('matches country case-insensitively', async () => {
+    await sequelize.sync({ force: true });
+    await createEmployee('India', 100000, 'India One');
+
+    const response = await request(app).get('/metrics/country').query({ name: 'india' });
+
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual({
+      country: 'india',
+      min_salary: 100000,
+      max_salary: 100000,
+      avg_salary: 100000,
+    });
+  });
+
   it('returns 404 when no employees exist for the requested country', async () => {
     await sequelize.sync({ force: true });
     await createEmployee('United States', 150000, 'US Only');
