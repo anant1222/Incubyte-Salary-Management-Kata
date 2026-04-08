@@ -49,9 +49,9 @@ export async function updateEmployee(
 }
 
 export async function deleteEmployee(id: number): Promise<void> {
-  const deleted = await employeeRepository.deleteEmployeeById(id);
+  const removed = await employeeRepository.deleteEmployeeById(id);
 
-  if (!deleted) {
+  if (!removed) {
     throw new HttpError(HTTP_STATUS.NOT_FOUND, MESSAGES.EMPLOYEE_NOT_FOUND);
   }
 }

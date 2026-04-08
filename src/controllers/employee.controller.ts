@@ -68,6 +68,7 @@ export async function deleteEmployee(
   try {
     const id = Number(req.params.id);
     await employeeService.deleteEmployee(id);
+
     sendSuccess(
       res,
       MESSAGES.EMPLOYEE_DELETED,
