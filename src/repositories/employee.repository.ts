@@ -41,11 +41,11 @@ export async function deleteEmployeeById(id: number): Promise<boolean> {
 export async function findSalariesByCountry(
   country: string,
 ): Promise<number[]> {
-  const rows = await Employee.findAll({
+  const records = await Employee.findAll({
     where: { country },
     attributes: ['salary'],
     raw: true,
   });
 
-  return rows.map((row) => row.salary as number);
+  return records.map((record) => record.salary as number);
 }

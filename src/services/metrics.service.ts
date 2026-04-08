@@ -24,7 +24,8 @@ export async function getCountrySalaryMetrics(
 
   const min_salary = Math.min(...salaries);
   const max_salary = Math.max(...salaries);
-  const avg_salary = salaries.reduce((a, s) => a + s, 0) / salaries.length;
+  const sum = salaries.reduce((total, salary) => total + salary, 0);
+  const avg_salary = sum / salaries.length;
 
   return { country, min_salary, max_salary, avg_salary };
 }

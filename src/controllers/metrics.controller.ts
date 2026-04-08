@@ -10,7 +10,7 @@ export async function getCountrySalaryMetrics(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const country = String(req.query.name);
+    const { name: country } = req.query as { name: string };
     const metrics = await metricsService.getCountrySalaryMetrics(country);
 
     sendSuccess(
