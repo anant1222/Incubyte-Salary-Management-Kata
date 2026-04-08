@@ -66,6 +66,26 @@ describe('GET /metrics/job', () => {
     });
   });
 
+  it('matches job titles that contain the query (case-insensitive)', async () => {
+    await sequelize.sync({ force: true });
+    await createEmployee('Senior Backend Engineer', 120000, 'Senior BE');
+
+    const response = await request(app)
+      .get('/metrics/job')
+      .query({ title: 'Backend Engineer' });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      success: true,
+      message: 'Job title salary metrics fetched successfully',
+      statusCode: 200,
+      data: {
+        job_title: 'Backend Engineer',
+        avg_salary: 120000,
+      },
+    });
+  });
+
   it('returns 404 when no employees exist for the requested job title', async () => {
     await sequelize.sync({ force: true });
     await createEmployee('Product Manager', 150000, 'PM Only');
